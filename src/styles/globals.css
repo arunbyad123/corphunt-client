@@ -1,0 +1,117 @@
+:root{
+  --bg:#0f1216;
+  --panel:#12161c;
+  --text:#e8eef6;
+  --muted:#b8c4d4;
+  --brand:#00e7e7;
+  --brand-2:#00b3ff;
+  --danger:#ff5d5d;
+}
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+a{color:var(--brand-2); text-decoration:none}
+a:hover{text-decoration:underline}
+.container{
+  width:min(1200px, 92vw);
+  margin-inline:auto;
+}
+
+/* hero title */
+h1.hero{
+  font-size: clamp(2rem, 4vw + 1rem, 4.2rem);
+  line-height:1.1;
+  margin: 14vh 0 1rem;
+  text-shadow: 0 8px 40px rgba(0,0,0,.4);
+}
+
+/* search block below hero */
+.nav-search{
+  width:min(880px, 100%);
+}
+.search-wrap{
+  display:flex; gap:.5rem; align-items:center;
+  background: rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  padding:.4rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  width:min(780px, 100%);
+}
+.search-wrap input{
+  flex:1;
+  padding: .9rem 1rem;
+  border:none; outline:none;
+  font-size:1rem; color:var(--text);
+  background: transparent;
+}
+.btn{
+  border:none; outline:none; cursor:pointer;
+  padding:.85rem 1.1rem;
+  border-radius:10px;
+  font-weight:600;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  color:#051014;
+  transition: transform .08s ease, filter .2s ease;
+}
+.btn:hover{ filter:brightness(1.08) }
+.btn:active{ transform: translateY(1px) }
+
+
+.link:hover{
+  text-decoration: none;
+  scale: 0.88;
+}
+
+.form-card{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+
+/* home page  */
+/* Animated welcome text */
+/* Non-intrusive cinematic welcome text */
+.welcome-message {
+  font-size: clamp(1.8rem, 4vw + 0.6rem, 3rem);
+  color: white;
+  text-align: center;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: cinematicReveal 1.8s ease-out 0.2s forwards;
+}
+
+/* Combine glide, glow, and fade for cinematic flair */
+@keyframes cinematicReveal {
+  0% {
+    transform: translateY(30px) skewY(8deg);
+    opacity: 0;
+    
+  }
+  50% {
+    opacity: 0.7;
+    
+  }
+  100% {
+    transform: translateY(0) skewY(0);
+    opacity: 1;
+    
+  }
+}
+
+
+
+
+@media (max-width:768px){
+  h1.hero{ margin-top: 12vh }
+  .search-wrap{ flex-direction:column; padding:.6rem }
+  .btn{ width:100% }
+}

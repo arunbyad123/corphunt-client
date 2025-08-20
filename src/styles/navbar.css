@@ -1,0 +1,130 @@
+.navbar{
+  position:fixed; inset-block-start:0; inset-inline:0;
+  display:flex; align-items:center; gap:1rem;
+  padding:.6rem .9rem;
+  background: linear-gradient(180deg, rgba(15,18,22,.9), rgba(15,18,22,.55) 60%, transparent);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  z-index:10;
+  height: 80px;
+}
+.navbar .brand{
+  display:flex; align-items:center; gap:.55rem; font-weight:800; letter-spacing:.2px;
+}
+.navbar .brand img{ width:28px; height:28px }
+.navbar .brand span{ font-size:1.05rem }
+
+.nav-center{
+  flex:1; display:flex; justify-content:center;
+}
+.nav-actions{
+  display:flex; gap:.5rem; align-items:center;
+}
+
+/* navbar search (compact) */
+.nav-search{
+  display:flex; align-items:center; gap:.4rem;
+  width:min(880px, 100%);
+  background: rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;
+  padding:.25rem .3rem;
+  backdrop-filter: blur(8px);
+}
+.nav-search input{
+  flex:1; padding:.6rem .65rem; border:none; outline:none;
+  background:transparent; color:var(--text);
+}
+.nav-search select{
+  background:rgba(0,0,0,.25);
+  color:var(--text);
+  border:1px solid rgba(255,255,255,.12);
+  padding:.45rem .55rem; border-radius:8px;
+}
+select option{
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.4rem);
+  background-color: var(--panel);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  min-width: 120px;
+  padding: 0.2rem 0;
+  z-index: 50;
+}
+
+/* auth links/buttons */
+.link{
+  padding:.55rem .8rem; border-radius:10px;
+  border:1px solid rgba(255,255,255,.12);
+  color:var(--text);
+}
+/* Ensure dropdown container is properly positioned */
+.user-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.4rem);
+  background-color: var(--panel);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  min-width: 120px;
+  padding: 0.2rem 0;
+  z-index: 50;
+}
+
+.location-dropdowns {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.state-dropdown,
+.city-dropdown {
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.45rem 0.55rem;
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  width: 200px;
+}
+
+.state-dropdown:focus,
+.city-dropdown:focus {
+  outline: none;
+  border-color: var(--brand);
+}
+
+/* Style for Logout button inside dropdown */
+.dropdown-item {
+  background: none;
+  border: none;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  text-align: left;
+  font-size: 0.95rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* Hover state */
+.dropdown-item:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--brand);
+}
+
+
+.link:hover{ background:rgba(255,255,255,.07) }
+@media (max-width:900px){
+  .nav-center{ display:none; } /* keep navbar tidy on small screens */
+}

@@ -1,0 +1,98 @@
+/* Background */
+#three-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* Container */
+.admin-container {
+  min-height: 100vh;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: rgba(0,0,0,0.6);
+  position: relative;
+  z-index: 1;
+}
+
+/* Admin panel buttons - scoped */
+.admin-panel-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Specific buttons */
+.back-login-btn { background: #ff9800; color: white; }
+.add-user-btn { background: #28a745; color: white; margin-top: 10px; }
+.edit-user-btn { background: #007bff; color: white; margin-right: 5px; }
+.delete-user-btn { background: #dc3545; color: white; }
+
+/* Main content */
+.admin-main {
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Form */
+.user-form {
+  background: rgba(0,0,0,0.6);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.user-form input {
+  padding: 8px;
+  border-radius: 4px;
+  border: none;
+}
+
+/* Users Table */
+.users-table-container {
+  background: rgba(0,0,0,0.6);
+  padding: 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.users-table th, .users-table td {
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+  text-align: left;
+}
+
+.users-table th {
+  background: rgba(255,255,255,0.1);
+}
+
+/* Hover effect */
+.users-table tbody tr:hover {
+  background: rgba(255,255,255,0.1);
+}
