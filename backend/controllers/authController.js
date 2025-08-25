@@ -1,38 +1,57 @@
 import User from "../models/User.js";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import transporter from "../config/nodemailer.js"; // ✅ use the central transporter
+
+let otpStore = {}; // temporary in-memory OTP store { email: otp }
 
 export const signup = async (req, res) => {
   try {
-    const { name, email, country, city, password } = req.body;
+    const { name, email } = req.body;
 
+    // check if user already exists
     const existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(400).json({ message: "Email already registered" });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // generate OTP (6-digit)
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    otpStore[email] = otp;
 
-    const user = await User.create({ name, email, country, city, password: hashedPassword });
+    // send email using transporter.js
+    await transporter.sendMail({
+      from: `"MyApp Support" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: "Verify your email",
+      text: `Your OTP code is: ${otp}`,
+      html: `<p>Your OTP code is: <b>${otp}</b></p>`, // prettier version
+    });
 
-    res.status(201).json({ message: "Signup successful!" });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    return res.json({ message: "OTP sent to email. Please verify." });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Signup error", error: error.message });
   }
 };
 
-export const login = async (req, res) => {
+export const verifyOtp = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, otp, password, country, city } = req.body;
 
-    const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: "Invalid email or password" });
+    if (!otpStore[email] || otpStore[email] !== otp) {
+      return res.status(400).json({ message: "Invalid or expired OTP" });
+    }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid email or password" });
+    // Save user only after OTP is verified
+    const newUser = new User({ name, email, password, country, city });
+    await newUser.save();
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+    delete otpStore[email]; // cleanup after success
 
-    res.status(200).json({ token, user: { id: user._id, name: user.name, email: user.email, country: user.country, city: user.city } });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    return res.json({ message: "User registered successfully" });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Verification error", error: error.message });
   }
 };

@@ -62,7 +62,7 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <Link to="/forgot-password" className="forgot-link">
+              <Link to="/forgetpassword" className="forgot-link">
                 Forgot password?
               </Link>
             </div>

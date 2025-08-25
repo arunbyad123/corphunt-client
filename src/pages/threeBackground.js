@@ -36,10 +36,9 @@ export default function initThreeBackground() {
     torusKnot.rotation.y += 0.01;
     renderer.render(scene, camera);
   }
-
   animate();
 
-  // Handle resize
+  //Handle resize
   window.addEventListener("resize", () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();

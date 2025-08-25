@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/signup';
 import AdminPanel from "./pages/AdminPanel";
+import ForgetPassword from "./pages/ForgotPassword"
 
 export default function App() {
   return (
@@ -13,6 +14,8 @@ export default function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/admin" element={<AdminPanel onBackToLogin={() => navigate("/login")} />} />
+        <Route path="/forgetpassword" element={<ForgetPassword />} />
+
       </Routes>
     </Router>
   );
